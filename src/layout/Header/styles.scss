@@ -1,3 +1,4 @@
+$yellow: #f3a952;
 .wrap {
   position: absolute;
   top: 0;
@@ -49,7 +50,7 @@
 
         &:after {
           //make the hover effect on the navbar menu
-          content: '';
+          content: "";
           height: 2px;
           background: white;
           position: absolute;
@@ -70,6 +71,49 @@
         }
       }
     }
+  }
+
+  .button {
+    font-size: 1rem;
+    border: 2px solid $yellow;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    // padding: 5px;
+    margin: 5px auto;
+    transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+  }
+
+  .icon {
+    position: relative;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: $yellow;
+  }
+  .icon i {
+    display: none;
+  }
+  .button:hover .icon i,
+  .button.active .icon i {
+    display: inline-block;
+  }
+  //Hover
+  //-----------------------
+  .button:hover {
+    width: 125px;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    color: $yellow;
+    transition: 0.3s;
+    border: none;
+  }
+
+  .button:active {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.05s;
   }
 }
 
