@@ -1,0 +1,52 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  height: 15%;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+  .song-name {
+    display: flex;
+    align-items: center;
+
+    span {
+      color: white;
+
+    }
+  }
+  .controller {
+    display: flex;
+    align-items: center;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+    font-style: italic;
+    
+    .author-name {
+      margin-left: 5px;
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+    }
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+}

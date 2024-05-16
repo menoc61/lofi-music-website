@@ -1,0 +1,17 @@
+.play-btn,
+.skip-btn {
+  background: transparent;
+  border: none;
+}
+
+@media screen and (max-width: 768px) {
+  .play-btn {
+    width: 60px;
+    height: 60px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
