@@ -12,7 +12,7 @@ export interface IDarkLightSwitchProps {
 }
 
 const Header = () => {
-  const [fullscreen, setFullscreen] = useState(false);
+  const [fullscreen, setFullscreen] = useState<boolean>(false);
   const daynight = useSelector((state: RootState) => state.mode);
   const dispatch = useDispatch();
   const { mode } = daynight;
@@ -20,7 +20,10 @@ const Header = () => {
   const daynightHandler = () => {
     dispatch(changeDayNight());
   };
-
+const addStarHandler = () => {
+  console.log('star');
+}
+const stars : number = 3;
   const fullscreenHandler = () => {
     if (!fullscreen) {
       document.documentElement.requestFullscreen();
@@ -41,6 +44,16 @@ const Header = () => {
         <a target='_blank' rel='noreferrer' href={CONSTANTS.AUTHOR_GITHUB_LINK}>
           <i className='fab fa-github'></i>
           <span>GitHub</span>
+        </a>
+        <div className='github-stars'>
+          <span>{stars} Stars</span>
+          <button onClick={addStarHandler} className='star-btn'>
+            <i className='fas fa-star'></i> Star
+          </button>
+        </div>
+        <a target='_blank' rel='noreferrer' href={CONSTANTS.AUTHOR_PORTFOLIO_LINK}>
+          <i className='fas fa-globe'></i>
+          <span>portfolio</span>
         </a>
         <div onClick={daynightHandler}>
           <DarkLightSwitch theme={mode} />
