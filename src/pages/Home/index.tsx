@@ -7,6 +7,7 @@ import RainToggleButton from "../../components/RainToggleButton";
 import Footer from "../../layout/Footer";
 import { useTimer } from "react-timer-hook";
 import { RootState, useAppSelector } from "../../store/store";
+import { VideoSource } from "../../types/interface";
 const Home = () => {
   const [timerStart, setTimerStart] = useState(false);
 
@@ -34,44 +35,27 @@ const Home = () => {
     time.setSeconds(time.getSeconds() + setupTimer);
     restart(time);
   };
-
+  const videoSources: VideoSource = {
+    "night-clear": "/assets/video/Night-clear.mp4",
+    "night-rain": "/assets/video/Night-rainny.mp4",
+    "day-clear": "/assets/video/Day-sunny.mp4",
+    "day-rain": "/assets/video/Day-rainny.mp4",
+  };
   return (
     <>
-      {/* Embedded the background video base on each state */}
-      {/* Night */}
-      <video
-        className={combineMode === "night-clear" ? "videoIn" : "videoOut"}
-        autoPlay
-        loop
-        muted
-      >
-        <source src='/assets/video/Night-clear.mp4' type='video/mp4' />
-      </video>
-      <video
-        className={combineMode === "night-rain" ? "videoIn" : "videoOut"}
-        autoPlay
-        loop
-        muted
-      >
-        <source src='/assets/video/Night-rainny.mp4' type='video/mp4' />
-      </video>
-      {/* Day */}
-      <video
-        className={combineMode === "day-clear" ? "videoIn" : "videoOut"}
-        autoPlay
-        loop
-        muted
-      >
-        <source src='/assets/video/Day-sunny.mp4' type='video/mp4' />
-      </video>
-      <video
-        className={combineMode === "day-rain" ? "videoIn" : "videoOut"}
-        autoPlay
-        loop
-        muted
-      >
-        <source src='/assets/video/Day-rainny.mp4' type='video/mp4' />
-      </video>
+      {/* Render video elements */}
+      {Object.keys(videoSources).map((key) => (
+        <video
+          key={key}
+          className={combineMode === key ? "videoIn" : "videoOut"}
+          autoPlay
+          loop
+          muted
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        >
+          <source src={videoSources[key]} type="video/mp4" />
+        </video>
+      ))}
       <RainToggleButton />
       <ModifierBoard
         seconds={seconds}

@@ -1,4 +1,5 @@
 $yellow: #f3a952;
+
 .wrap {
   position: absolute;
   top: 0;
@@ -19,13 +20,17 @@ $yellow: #f3a952;
     }
     @media (max-width: 768px) {
       padding: 0 5px;
+      img {
+        max-width: 100px;
+        max-height: 100px;
+      }
     }
   }
 
   .nav-menu {
     display: flex;
     flex: 1;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 0 5px;
 
     a {
@@ -49,7 +54,6 @@ $yellow: #f3a952;
         padding: 0 8px;
 
         &:after {
-          //make the hover effect on the navbar menu
           content: "";
           height: 2px;
           background: white;
@@ -63,8 +67,8 @@ $yellow: #f3a952;
           transform: scaleX(0);
         }
       }
+
       &:hover {
-        //make the hover effect on the navbar menu
         span:after {
           transform: scaleX(1);
           opacity: 1;
@@ -79,10 +83,19 @@ $yellow: #f3a952;
     border-radius: 100px;
     width: 40px;
     height: 40px;
-    // padding: 5px;
     margin: 5px auto;
     transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 125px;
+      height: 30px;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+      color: $yellow;
+      transition: 0.3s;
+      border: none;
+    }
   }
 
   .icon {
@@ -92,15 +105,26 @@ $yellow: #f3a952;
     transform: translateY(-50%);
     text-align: center;
     color: $yellow;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
   }
+
   .icon i {
     display: none;
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+      display: inline-block;
+    }
   }
+
   .button:hover .icon i,
   .button.active .icon i {
     display: inline-block;
   }
-  //Hover
+
+  // Hover
   //-----------------------
   .button:hover {
     width: 125px;
@@ -109,6 +133,10 @@ $yellow: #f3a952;
     color: $yellow;
     transition: 0.3s;
     border: none;
+
+    @media (max-width: 768px) {
+      width: 100px;
+    }
   }
 
   .button:active {
@@ -124,5 +152,31 @@ $yellow: #f3a952;
 
   @media screen and (max-width: 1024px) {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 10px 0;
+
+    a,
+    .button {
+      margin: 5px 0;
+      text-align: left;
+    }
+  }
+
+  .fullscreen-btn {
+    align-self: center;
+    margin-top: 10px;
   }
 }

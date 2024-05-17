@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeDayNight } from "../../store/slice/modeSlice";
 import "./styles.scss";
@@ -23,7 +23,9 @@ const Header = () => {
   useEffect(() => {
     const fetchStars = async () => {
       try {
-        const response = await axios.get(`https://api.github.com/repos/${CONSTANTS.REPO_OWNER}/${CONSTANTS.REPO_NAME}`);
+        const response = await axios.get(
+          `https://api.github.com/repos/${CONSTANTS.REPO_OWNER}/${CONSTANTS.REPO_NAME}`
+        );
         const { stargazers_count } = response.data;
         setStars(stargazers_count);
       } catch (error) {
@@ -37,9 +39,29 @@ const Header = () => {
   const daynightHandler = () => {
     dispatch(changeDayNight());
   };
-const addStarHandler = () => {
-  console.log('star');  
-}
+
+  const addStarHandler = async () => {
+    try {
+      const response = await axios.put(
+        `https://api.github.com/user/starred/${CONSTANTS.REPO_OWNER}/${CONSTANTS.REPO_NAME}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
+          },
+        }
+      );
+
+      if (response.status === 204) {
+        console.log("Successfully added star to the repository");
+        setStars((prevStars) => (prevStars !== null ? prevStars + 1 : 1));
+      } else {
+        console.error("Failed to add star:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error adding star:", error);
+    }
+  };
 
   const fullscreenHandler = () => {
     if (!fullscreen) {
@@ -52,37 +74,41 @@ const addStarHandler = () => {
   };
 
   return (
-    <nav className='wrap'>
-      <Link to='/'>
-        <img src='/assets/icons/lofi-logo.gif' alt='' />
+    <nav className="wrap">
+      <Link to="/">
+        <img src="/assets/icons/lofi-logo.gif" alt="" />
       </Link>
-      <div className='nav-menu'></div>
-      <div className='nav-menu'>
-        <a target='_blank' rel='noreferrer' href={CONSTANTS.AUTHOR_GITHUB_LINK}>
-          <i className='fab fa-github'></i>
+      <div className="nav-menu"></div>
+      <div className="nav-menu">
+        {loading ? (
+          <Spinner size="sm" />
+        ) : (
+          <div onClick={addStarHandler} className="button">
+            <div className="icon">
+              {stars !== null ? stars : "N/A"}
+              <i className="fas fa-star"></i>
+            </div>
+          </div>
+        )}
+        <a target="_blank" rel="noreferrer" href={CONSTANTS.AUTHOR_GITHUB_LINK}>
+          <i className="fab fa-github"></i>
           <span>GitHub</span>
         </a>
-        <div className=" d-flex align-items-center">
-          {loading ? (
-            <Spinner size="sm" />
-          ) : (
-            <div onClick={addStarHandler} className='button'>
-             <div className='icon'>
-             {stars !== null ? stars : "N/A"}<i className="fas fa-star"></i>
-             </div>
-            </div>
-          )}
-        </div>
-        <a target='_blank' rel='noreferrer' href={CONSTANTS.AUTHOR_PORTFOLIO_LINK}>
-          <i className='fas fa-globe'></i>
+
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={CONSTANTS.AUTHOR_PORTFOLIO_LINK}
+        >
+          <i className="fas fa-globe"></i>
           <span>portfolio</span>
         </a>
         <div onClick={daynightHandler}>
           <DarkLightSwitch theme={mode} />
         </div>
 
-        <button onClick={fullscreenHandler} className='fullscreen-btn'>
-          <i className='fas fa-expand fa-lg'></i>
+        <button onClick={fullscreenHandler} className="fullscreen-btn">
+          <i className="fas fa-expand fa-lg"></i>
         </button>
       </div>
     </nav>
