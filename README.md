@@ -1,8 +1,8 @@
+# Lofi Music Website
+
 ![React](https://img.shields.io/badge/React-17.0.2-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Vercel](https://vercel-badge.vercel.app/api/your-username/lofi-music-website)
-
-# Lofi Music Website
+![Vercel](https://vercel-badge.vercel.app/api/menoc61/lofi-music-website)
 
 This project is a lofi music website built using React.js. It provides a soothing and relaxing experience for users who enjoy listening to lofi music. The website is designed to create a calming ambiance with its minimalistic and aesthetically pleasing interface. This project was inspired by my love of listening to lofi music from YouTube while coding.
 
